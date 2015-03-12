@@ -1,0 +1,46 @@
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed7d" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "migration", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed7e" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "migrate", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed7f" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "immigration", "enabled" : true, "hits" : { "$numberLong" : "1" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed80" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "immigrant", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed81" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "immigrants", "enabled" : true, "hits" : { "$numberLong" : "2" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed82" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "expatriation", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed83" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "transmigrate", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed84" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "border", "enabled" : true, "hits" : { "$numberLong" : "1" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed85" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "border police", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed86" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "border patrol", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed87" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "the death train", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed88" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "the train of the unknowns", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed89" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "green card", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed8a" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "deportation", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed8b" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "deport", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed8c" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "deporting", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed8d" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "the beast", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed8e" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "uscis", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed8f" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "mexico", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed90" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "undocumented", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed91" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "rio bravo", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed92" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "rio grande", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed93" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "natural border", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed94" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "coyote", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed95" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "coyotes", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed96" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "drug trafficking", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed97" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "eagle pass", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed98" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "alien", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed99" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "aliens", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed9a" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "latino", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed9b" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "latinos", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed9c" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "hispanic", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed9d" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "hispanics", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed9e" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "pew hispanic", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5ed9f" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "mexican", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda0" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "mexicans", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda1" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "centralamerican", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda2" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "centralamericans", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda3" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "central america", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda4" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "guatemalan", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda5" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "caribbean", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda6" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "dreamers", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda7" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "customs and border protection", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda8" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "cbp", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "5500d1386be6e86bb9a5eda9" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "daca", "enabled" : true, "hits" : { "$numberLong" : "0" } }
+{ "_id" : { "$oid" : "55010ae61ac257d7f0c606cc" }, "_class" : "com.copili.feeder.domain.FilterWord", "word" : "the", "enabled" : false, "hits" : { "$numberLong" : "19" } }
