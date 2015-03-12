@@ -30,6 +30,9 @@ public class FeedEntry extends BaseDocument implements Serializable {
     @JsonProperty("matched_words")
     private List<String> matchedWords;
 
+    @JsonProperty("frequency_words")
+    private List<String> frequencyWords;
+
     @JsonProperty("hits")
     private Integer hits;
 
@@ -61,6 +64,7 @@ public class FeedEntry extends BaseDocument implements Serializable {
         this.matchedWords = new ArrayList<>();
         this.matchedPhrases = new ArrayList<>();
         this.thumbnails = new ArrayList<>();
+        this.frequencyWords = new ArrayList<>();
         this.source = source;
         this.processed = false;
         this.state = "US";
@@ -174,4 +178,22 @@ public class FeedEntry extends BaseDocument implements Serializable {
     public void setHits(Integer hits) {
         this.hits = hits;
     }
+
+    public List<String> getFrequencyWords() {
+        return frequencyWords;
+    }
+
+    public void setFrequencyWords(List<String> frequencyWords) {
+        this.frequencyWords = frequencyWords;
+    }
+
+    @JsonProperty("frequent_words_as_string")
+    public String getFrecuentWordsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String word : frequencyWords) {
+            sb.append(word).append(',');
+        }
+        return StringUtils.removeEnd(sb.toString(), ",");
+    }
+
 }

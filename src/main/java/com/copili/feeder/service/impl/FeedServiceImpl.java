@@ -17,6 +17,8 @@ import de.l3s.boilerpipe.extractors.ArticleExtractor;
 import de.l3s.boilerpipe.sax.BoilerpipeSAXInput;
 import de.l3s.boilerpipe.sax.HTMLDocument;
 import de.l3s.boilerpipe.sax.HTMLFetcher;
+import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.sentdetect.SentenceDetector;
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
@@ -54,6 +56,8 @@ public class FeedServiceImpl implements FeedService {
 
     private SentenceDetector sentenceDetector;
 
+    private POSTaggerME posTagger;
+
     public FeedServiceImpl() {
         try {
             Resource englishTokenModelResource = new ClassPathResource("en-token.bin");
@@ -67,6 +71,12 @@ public class FeedServiceImpl implements FeedService {
             SentenceModel englishSentenceModel = new SentenceModel(is2);
             sentenceDetector = new SentenceDetectorME(englishSentenceModel);
             is2.close();
+
+            Resource maxentModelresource = new ClassPathResource("en-pos-maxent.bin");
+            InputStream is3 = maxentModelresource.getInputStream();
+            POSModel posModel = new POSModel(is3);
+            posTagger = new POSTaggerME(posModel);
+            is3.close();
 
         } catch (Exception e) {
             log.error("Error al inicializar FeedService");
@@ -137,6 +147,10 @@ public class FeedServiceImpl implements FeedService {
         for (FeedEntry feedEntry : feedEntries) {
             String text = extractArticleContentFromUri(feedEntry.getUri());
             String tokens[] = tokenizer.tokenize(text);
+            String[] frequencyWords = frequencyWords(tokens);
+            if (ArrayUtils.isNotEmpty(frequencyWords)) {
+                CollectionUtils.addAll(feedEntry.getFrequencyWords(), frequencyWords);
+            }
             String[] matchedWords = matchedWords(tokens, filterWordRepository.findByEnabled(true));
             if (ArrayUtils.isNotEmpty(matchedWords)) {
                 CollectionUtils.addAll(feedEntry.getMatchedWords(), matchedWords);
@@ -147,6 +161,39 @@ public class FeedServiceImpl implements FeedService {
             }
         }
         return filteredFeedEntries;
+    }
+
+    private String[] posTags = {
+            "NN", "NNS", "NNP", "NNPS"
+    };
+
+    private String[] frequencyWords(String[] tokens) {
+        Map<String, Integer> frequency = new HashMap<>();
+        String[] tags = posTagger.tag(tokens);
+        double probabilities[] = posTagger.probs();
+        for(int i = 0; i < tokens.length; i++) {
+            if(ArrayUtils.contains(posTags, tags[i])) {
+                Integer times = frequency.get(tokens[i]);
+                if (null != times) {
+                    frequency.put(tokens[i], times + 1);
+                } else {
+                    frequency.put(tokens[i], 1);
+                }
+            }
+        }
+        List<Map.Entry<String, Integer>> list = new LinkedList<>(frequency.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return (o2.getValue()).compareTo(o1.getValue());
+            }
+        });
+        List<String> words = new ArrayList<>();
+        for (Map.Entry<String, Integer> me : list) {
+            if (words.size() < 5) {
+                words.add(me.getKey());
+            }
+        }
+        return words.toArray(new String[words.size()]);
     }
 
     private String[] matchedWords(String[] tokens, List<FilterWord> filterWords) {

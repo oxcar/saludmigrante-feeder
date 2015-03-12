@@ -57,6 +57,13 @@
                         <select ng-model="feedEntry.state" ng-options="state.code as state.state for state in states"></select>
                     </div>
                 </div>
+                <br/>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h5 class="subheader">Palabras Frecuentes</h5>
+                        <a href="#" class="button tiny disabled radius" style="margin-right: 3px;" ng-repeat="word in feedEntry.frequency_words">{{word}}</a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="large-12 columns">
                         <h5 class="subheader">Palabras Clave</h5>
