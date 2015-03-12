@@ -1,5 +1,9 @@
 # Salud Migrante - Feeder
 
+## Introduccion
+
+- Este proyecto sirve para apoyar a la generacion de Copis de Experience, para el proyecto Salud Migrante.
+
 ## Tecnologias
 
 - Oracle Java 1.7: La aplicacion de servidor esta desarrollada en Java. 
@@ -7,6 +11,7 @@
 - Apache Tomcat 7: Servidor de aplicaciones
 - Foundation 5: libreria CSS para maquetar las vistas
 - AngularJs: para la conexion con el Backend (peticiones Ajax) y para manejar el modelo de datos en la vista
+- MongoDB: como Base de Datos
 
 ## Back End
 
