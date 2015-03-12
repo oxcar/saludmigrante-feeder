@@ -30,6 +30,9 @@ public class FeedEntry extends BaseDocument implements Serializable {
     @JsonProperty("matched_words")
     private List<String> matchedWords;
 
+    @JsonProperty("hits")
+    private Integer hits;
+
     @JsonProperty("matched_phrases")
     private List<String> matchedPhrases;
 
@@ -162,5 +165,13 @@ public class FeedEntry extends BaseDocument implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Integer getHits() {
+        return hits;
+    }
+
+    public void setHits(Integer hits) {
+        this.hits = hits;
     }
 }

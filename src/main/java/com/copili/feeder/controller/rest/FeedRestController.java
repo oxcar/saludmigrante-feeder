@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -98,7 +99,11 @@ public class FeedRestController extends BaseRestController {
 
     @RequestMapping(value = "all-entries", method = RequestMethod.GET)
     public ResponseEntity loadFeedEntries() {
-        Pageable pageRequest = new PageRequest(0, 10);
+        Sort sort = new Sort(
+                new Sort.Order(Sort.Direction.DESC, "hits"),
+                new Sort.Order(Sort.Direction.DESC, "publishedDate")
+                );
+        Pageable pageRequest = new PageRequest(0, 10, sort);
         Page<FeedEntry> feedEntries = feedEntryRepository.findAll(pageRequest);
         return new ResponseEntity<>(ApiResponse.ok(feedEntries.getContent()), HttpStatus.OK);
     }

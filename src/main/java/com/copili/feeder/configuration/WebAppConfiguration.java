@@ -1,7 +1,6 @@
 package com.copili.feeder.configuration;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +15,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.ui.velocity.VelocityEngineFactory;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -28,7 +26,6 @@ import org.springframework.web.servlet.view.JstlView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
@@ -121,22 +118,6 @@ public class WebAppConfiguration extends WebMvcConfigurerAdapter {
         supportedMediaTypes.add(MediaType.APPLICATION_OCTET_STREAM);
         converter.setSupportedMediaTypes(supportedMediaTypes);
         return converter;
-    }
-
-    @Bean(name = "velocityEngine")
-    public VelocityEngine velocityEngine() {
-        log.debug("Instanciando VelocityEngine");
-        try {
-            VelocityEngineFactory velocityEngineFactory = new VelocityEngineFactory();
-            Properties velocityProperties = new Properties();
-            velocityProperties.setProperty("resource.loader", "class");
-            velocityProperties.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-            velocityEngineFactory.setVelocityProperties(velocityProperties);
-            return velocityEngineFactory.createVelocityEngine();
-        } catch (Exception e) {
-            log.error("Error al instanciar VelocityEngine : {} : {}", e.getClass(), e.getMessage());
-        }
-        return null;
     }
 
 }

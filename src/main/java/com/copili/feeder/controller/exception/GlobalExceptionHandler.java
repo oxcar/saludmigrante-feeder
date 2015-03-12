@@ -1,23 +1,18 @@
 package com.copili.feeder.controller.exception;
 
 import com.copili.feeder.controller.rest.ApiResponse;
-import com.copili.feeder.exception.ChanchiAccountingException;
-import com.copili.feeder.exception.ChanchiException;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.Enumeration;
 
 @ControllerAdvice
@@ -59,20 +54,6 @@ public class GlobalExceptionHandler {
 		log.error( "======================================================================" );
 		log.error( "" );
 
-
-        // Cuando hay un problema al descontar creditos de la cuenta
-        if( exception instanceof ChanchiAccountingException) {
-            return new ResponseEntity<>( ApiResponse.withError(String.format("Hubo un problema con los Créditos de la Cuenta: %s", exception.getMessage())), HttpStatus.LOCKED );
-        }
-        if( exception instanceof ChanchiException ) {
-            return new ResponseEntity<>( ApiResponse.withError( String.format( "No se pudo realizar la operación: %s", exception.getMessage() ) ), HttpStatus.INTERNAL_SERVER_ERROR );
-        }
-        // AccessDeniedException lanzada por las anotaciones de Spring Security en los controladores
-        if( exception instanceof AccessDeniedException ) {
-            String apiKey = httpServletRequest.getHeader( "ApiKey" );
-            log.error( "El Usuario con Api Key [{}] no tiene permisos para ejecutar el metodo {} --> {}", apiKey, httpServletRequest.getMethod(), httpServletRequest.getRequestURL()  );
-            return new ResponseEntity<>( HttpStatus.UNAUTHORIZED );
-        }
         if( exception instanceof HttpMediaTypeNotSupportedException ) {
             return new ResponseEntity<>( ApiResponse.withError( String.format( "Content-Type %s no esta soportado", ( (HttpMediaTypeNotSupportedException) exception ).getContentType().toString() ) ), HttpStatus.BAD_REQUEST );
         }

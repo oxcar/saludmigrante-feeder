@@ -2,8 +2,10 @@ package com.copili.feeder.service.impl;
 
 import com.copili.feeder.domain.Feed;
 import com.copili.feeder.domain.FeedEntry;
+import com.copili.feeder.domain.FilterWord;
 import com.copili.feeder.domain.adapter.FeedEntryAdapter;
 import com.copili.feeder.repository.mongodb.FeedEntryRepository;
+import com.copili.feeder.repository.mongodb.FilterWordRepository;
 import com.copili.feeder.service.FeedService;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -45,6 +47,9 @@ public class FeedServiceImpl implements FeedService {
     @Autowired
     private FeedEntryRepository feedEntryRepository;
 
+    @Autowired
+    private FilterWordRepository filterWordRepository;
+
     private Tokenizer tokenizer;
 
     private SentenceDetector sentenceDetector;
@@ -75,19 +80,31 @@ public class FeedServiceImpl implements FeedService {
         List<FeedEntry> filteredFeedEntries = filterFeedEntries(feedEntries);
         Date lastUpdate = new Date(feed.getLastProcessedFeedEntry().getTime());
         for (FeedEntry feedEntry : filteredFeedEntries) {
-            if(feedEntry.getPublishedDate().compareTo(lastUpdate) > 0) {
+            if (feedEntry.getPublishedDate().compareTo(lastUpdate) > 0) {
                 lastUpdate = feedEntry.getPublishedDate();
             }
             if (feedEntry.getPublishedDate().compareTo(feed.getLastProcessedFeedEntry()) > 0) {
                 FeedEntry previousFeedEntry = feedEntryRepository.findOneByUri(feedEntry.getUri());
-                if(null == previousFeedEntry) {
+                if (null == previousFeedEntry) {
+                    feedEntry.setHits(feedEntry.getMatchedWords().size());
                     feedEntryRepository.save(feedEntry);
+                    updateStatistics(feedEntry.getMatchedWords());
                 }
             }
         }
         Date end = new Date();
         log.info("Time to process Feed: " + (end.getTime() - start.getTime()) + "ms");
         return lastUpdate;
+    }
+
+    private void updateStatistics(List<String> matchedWords) {
+        for (String matchedWord : matchedWords) {
+            FilterWord filterWord = filterWordRepository.findOneByWord(matchedWord);
+            if (null != filterWord) {
+                filterWord.incrementHits(1L);
+                filterWordRepository.save(filterWord);
+            }
+        }
     }
 
     private List<FeedEntry> parseFeed(Feed feed) {
@@ -120,7 +137,7 @@ public class FeedServiceImpl implements FeedService {
         for (FeedEntry feedEntry : feedEntries) {
             String text = extractArticleContentFromUri(feedEntry.getUri());
             String tokens[] = tokenizer.tokenize(text);
-            String[] matchedWords = matchedWords(tokens, filterWords);
+            String[] matchedWords = matchedWords(tokens, filterWordRepository.findByEnabled(true));
             if (ArrayUtils.isNotEmpty(matchedWords)) {
                 CollectionUtils.addAll(feedEntry.getMatchedWords(), matchedWords);
                 String[] sentences = sentenceDetector.sentDetect(text);
@@ -132,9 +149,10 @@ public class FeedServiceImpl implements FeedService {
         return filteredFeedEntries;
     }
 
-    private String[] matchedWords(String[] tokens, String[] words) {
+    private String[] matchedWords(String[] tokens, List<FilterWord> filterWords) {
         Set<String> matches = new HashSet<>();
-        for (String word : words) {
+        for (FilterWord filterWord : filterWords) {
+            String word = filterWord.getWord();
             if (StringUtils.isNotBlank(word) && ArrayUtils.contains(tokens, word)) {
                 log.info("Matches word " + word);
                 matches.add(word);
@@ -170,56 +188,5 @@ public class FeedServiceImpl implements FeedService {
         }
         return "";
     }
-
-    private String[] filterWords = {
-            "migration",
-            "migrate",
-            "immigration",
-            "immigrant",
-            "immigrants",
-            "expatriation",
-            "transmigrate",
-            "border",
-            "border police",
-            "border patrol",
-            "the death train",
-            "the train of the unknowns",
-            "green card",
-            "deportation",
-            "deport",
-            "deporting",
-            "the beast",
-            "uscis",
-            "mexico",
-            "undocumented",
-            "illegal",
-            "rio bravo",
-            "rio grande",
-            "natural border",
-            "coyote",
-            "coyotes",
-            "drug trafficking",
-            "eagle pass",
-            "alien",
-            "aliens",
-            "latino",
-            "latinos",
-            "hispanic",
-            "hispanics",
-            "pew hispanic",
-            "mexico",
-            "mexican",
-            "mexicans",
-            "centralamerican",
-            "centralamericans",
-            "central america",
-            "guatemalan",
-            "caribbean",
-            "ice",
-            "dreamers",
-            "customs and border protection",
-            "cbp",
-            "daca"
-    };
 
 }

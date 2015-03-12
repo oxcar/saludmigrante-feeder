@@ -1,7 +1,11 @@
 package com.copili.feeder.cron;
 
 import com.copili.feeder.domain.Feed;
+import com.copili.feeder.domain.FeedEntry;
+import com.copili.feeder.domain.FilterWord;
+import com.copili.feeder.repository.mongodb.FeedEntryRepository;
 import com.copili.feeder.repository.mongodb.FeedRepository;
+import com.copili.feeder.repository.mongodb.FilterWordRepository;
 import com.copili.feeder.service.FeedService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,16 +27,34 @@ public class RetrieveFeedsCronJob {
     @Autowired
     private FeedRepository feedRepository;
 
-    @Scheduled(fixedDelay = 10000)
+    @Autowired
+    private FeedEntryRepository feedEntryRepository;
+
+    @Autowired
+    private FilterWordRepository filterWordRepository;
+
+    @Scheduled(fixedDelay = 10 /*minutos*/ * 60 /*segundos*/ * 1000 /*milisegundos*/)
     public void processFeeds() {
         log.info("Process Feeds - Start");
         List<Feed> feeds = feedRepository.findAll();
-        for(Feed feed : feeds) {
+        for (Feed feed : feeds) {
             Date lastUpdate = feedService.retrieveFeedEntries(feed);
             feed.setLastProcessedFeedEntry(lastUpdate);
             feedRepository.save(feed);
         }
         log.info("Process Feeds - End");
     }
+
+    /*
+    @Scheduled(fixedDelay = 99999999) Esto ya no se va a usar
+    public void calculateHits() {
+        log.info("Calculate Hits - Start");
+        for(FeedEntry feedEntry : feedEntryRepository.findAll()) {
+            feedEntry.setHits(feedEntry.getMatchedWords().size());
+            feedEntryRepository.save(feedEntry);
+        }
+        log.info("Calculate Hits - End");
+    }
+    */
 
 }
